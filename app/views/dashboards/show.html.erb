@@ -1,0 +1,17 @@
+<h3>
+  This is your dashboard, it can show all kinds of stuff
+</h3>
+
+<p>
+  You are <%= current_user.first_name %> <%= current_user.last_name %>
+</p>
+
+<h4>
+  These are some gardens you own
+</h4>
+
+<ul>
+  <% @garden_ownerships.each do |garden_ownership| %>
+    <%= garden_ownership.garden.id %>
+  <% end %>
+</ul>
