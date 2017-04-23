@@ -10,10 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170423141037) do
+ActiveRecord::Schema.define(version: 20170423170902) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "attachinary_files", force: :cascade do |t|
+    t.string   "attachinariable_type"
+    t.integer  "attachinariable_id"
+    t.string   "scope"
+    t.string   "public_id"
+    t.string   "version"
+    t.integer  "width"
+    t.integer  "height"
+    t.string   "format"
+    t.string   "resource_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["attachinariable_type", "attachinariable_id", "scope"], name: "by_scoped_parent", using: :btree
+  end
 
   create_table "chats", force: :cascade do |t|
     t.integer  "sender_id"
@@ -36,13 +51,17 @@ ActiveRecord::Schema.define(version: 20170423141037) do
 
   create_table "garden_locations", force: :cascade do |t|
     t.integer  "garden_id"
-    t.integer  "garden_ownership_id"
+    t.string   "city"
+    t.string   "street_name"
+    t.string   "postal_code"
+    t.string   "house_number"
+    t.string   "country"
+    t.string   "extra_information"
     t.float    "longitude"
     t.float    "latitude"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
     t.index ["garden_id"], name: "index_garden_locations_on_garden_id", using: :btree
-    t.index ["garden_ownership_id"], name: "index_garden_locations_on_garden_ownership_id", using: :btree
   end
 
   create_table "garden_ownerships", force: :cascade do |t|
@@ -144,7 +163,6 @@ ActiveRecord::Schema.define(version: 20170423141037) do
   add_foreign_key "chats", "users", column: "receiver_id"
   add_foreign_key "chats", "users", column: "sender_id"
   add_foreign_key "crops", "harvests"
-  add_foreign_key "garden_locations", "garden_ownerships"
   add_foreign_key "garden_locations", "gardens"
   add_foreign_key "garden_ownerships", "gardens"
   add_foreign_key "garden_ownerships", "users"

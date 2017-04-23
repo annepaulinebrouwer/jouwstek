@@ -2,6 +2,7 @@ class DashboardsController < ApplicationController
 
   def show
     @garden_ownerships = GardenOwnership.where(user: current_user)
+    @garden_participations = GardenParticipation.where(user: current_user)
   end
 
   private

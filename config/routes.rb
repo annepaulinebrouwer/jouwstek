@@ -1,12 +1,14 @@
 Rails.application.routes.draw do
-
   devise_for :users, controllers: { registrations: 'users/registrations' }
+  mount Attachinary::Engine => "/attachinary"
 
   root to: 'pages#home'
   
   resources :gardens do
-    resources :garden_participations, only: [:create, :destroy]
     resources :garden_locations, except: [:index, :show]
+
+    resources :garden_participations, only: [:create, :destroy]
+
     resources :requests, only: [:new, :create]
     resources :posts, except: [:show, :index, :new]
 

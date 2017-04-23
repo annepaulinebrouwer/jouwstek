@@ -12,6 +12,29 @@
 
 <ul>
   <% @garden_ownerships.each do |garden_ownership| %>
+  <li>
     <%= garden_ownership.garden.id %>
+    <ul>
+      <% garden_ownership.garden.requests.each do |request| %>
+        <li>
+          <%= simple_form_for :request, url: confirm_dashboar_request_path do |f| %>
+          <%= f.submit %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </li>
+  <% end %>
+</ul>
+
+<h4>
+  These are some gardens you participate in
+</h4>
+
+<ul>
+  <% @garden_participations.each do |garden_participation| %>
+  <li>
+    <%= garden_participation.garden.id %>
+  </li>
   <% end %>
 </ul>

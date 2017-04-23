@@ -5,7 +5,11 @@
 <ul>
   <% @requests.each do |request| %>
   <li>
-    <%= request.message %>
+    <%= link_to request_path(request) do %>
+      <p>
+        <%= request.message %>
+      </p>
+    <% end %>
   </li>
   <% end %>
 </ul>

@@ -1,0 +1,6 @@
+<div id="map" style="height:400px;"></div>
+<%= render partial: "shared/single_item_map" %>
+
+<% @garden.photos.each do |photo| %>
+  <%= cl_image_tag photo.path, width: 300, height: 200, crop: :fill %>
+<% end %>

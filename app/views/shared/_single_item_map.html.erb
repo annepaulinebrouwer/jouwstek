@@ -1,0 +1,29 @@
+<% content_for(:after_js) do %>
+    <!-- Include Google Maps JS library. You should use your *own* key -->
+    <script src="https://maps.google.com/maps/api/js?key=<%= ENV['GOOGLE_API_BROWSER_KEY'] %>"></script>
+
+    <!-- Include Dependencies of GMaps for Rails gem -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-marker-clusterer/1.0.0/markerclusterer_compiled.js"></script>
+    <script src="https://cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/infobox/src/infobox_packed.js"></script>
+    <script src="https://cdn.rawgit.com/apneadiving/Google-Maps-for-Rails/master/js_compilation/gmaps_google.js"></script>
+  <%= javascript_tag do %>
+    $(document).ready(function() {
+      var coord = <%= raw @garden_coordinates.to_json %>;
+       var handler = Gmaps.build('Google', { markers: { clusterer: undefined }});
+        handler.buildMap({ internal: { id: 'map' } }, function(){
+          markers = handler.addMarkers([
+            {
+              "lat": coord.lat,
+              "lng": coord.lng,
+              "infowindow": "<h1><%= @garden.garden_location.address %></h1><p><img src='https://d1gofzrmx0fcbg.cloudfront.net/production/cities/city_pictures/000/000/008/thumbnail/marseille.jpg?1445520529' height='200'></p>"
+            }
+          ]);
+          handler.bounds.extendWith(markers);
+          handler.fitMapToBounds();
+          handler.getMap().setZoom(15);
+        });
+    });
+  <% end %>
+<% end %>

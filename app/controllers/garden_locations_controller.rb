@@ -1,6 +1,6 @@
 class GardenLocationsController < ApplicationController
   before_action :set_garden_location, only: [:edit, :update, :destroy]
-  before_action :set_garden, only: [:create, :update, :destroy]
+  before_action :set_garden, only: [:new, :create, :update, :destroy]
   def new
     @garden_location = GardenLocation.new
   end
@@ -8,7 +8,7 @@ class GardenLocationsController < ApplicationController
   def create
     @garden_location = GardenLocation.new(garden_location_params)
     @garden_location.garden = @garden
-    if @garden_location.save
+    if @garden_location.save!
       redirect_to garden_path(@garden)
     else
       render :new
@@ -42,6 +42,15 @@ class GardenLocationsController < ApplicationController
   end
 
   def garden_location_params
-    params.require(:garden_location).permit(:latitude, :longitude)
+    params.require(:garden_location).permit(
+      :latitude, 
+      :longitude, 
+      :city, 
+      :street_name, 
+      :postal_code, 
+      :house_number, 
+      :country, 
+      :extra_information
+      )
   end
 end
