@@ -1,0 +1,10 @@
+<h3>
+  <%= type %>
+</h3>
+
+<%= simple_form_for @crop do |f| %>
+<%= f.input :type %>
+<%= f.input :quantity %>
+<%= f.input :measurement_unit %>
+<%= f.submit %>
+<% end %>

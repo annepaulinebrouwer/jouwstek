@@ -1,0 +1,10 @@
+<h3>
+  <%= type %>
+</h3>
+
+<%= simple_form_for @garden do |f| %>
+<%= f.input :maximum_number_of_participants %>
+<%= f.input :whatsapp_group_url %>
+<%= f.input :photos, as: :attachinary %>
+<%= f.submit %>
+<% end %>

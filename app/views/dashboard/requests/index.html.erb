@@ -1,0 +1,15 @@
+<h3>
+  All the requests you made are here
+</h3>
+
+<ul>
+  <% @requests.each do |request| %>
+  <li>
+    <%= link_to request_path(request) do %>
+      <p>
+        <%= request.message %>
+      </p>
+    <% end %>
+  </li>
+  <% end %>
+</ul>

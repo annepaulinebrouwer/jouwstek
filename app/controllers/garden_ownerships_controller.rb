@@ -1,0 +1,1 @@
+# Maybe for a future feature where a garden can be transferred to a different owner
